@@ -1,0 +1,80 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+button {
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.inp {
+  height: 40px;
+  width: 100px;
+  padding-top: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.game {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 700px;
+  width: 700px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.box {
+  margin: 0 auto;
+  height: 600px;
+  width: 600px;
+  border: 1px solid black;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 0px;
+}
+
+.box-inner {
+  height: 60px;
+  width: 60px;
+  border: 1px solid black;
+}
+
+.timer {
+  font-size: 36px;
+}
+
+.cub-blue {
+  background-color: blue;
+}
+
+.cub-red {
+  background-color: red;
+}
+/*# sourceMappingURL=main.css.map */
