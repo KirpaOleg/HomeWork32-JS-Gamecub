@@ -13,7 +13,7 @@ const inp = document.querySelector('.inp');
 const btn = document.querySelector('.button');
 const timer = document.querySelector('.timer');
 const box = document.querySelector('.box');
-const boxInner = document.querySelector('.box-inner');
+
 
 // Генерируем поле из 100 квадратов
 for (let i = 0; i < 99; i++) {
@@ -28,14 +28,32 @@ const randomInteger = (min, max) => {
 };
 
 // Функция появления синего квадрата 
-const startGame = () => {
+btn.addEventListener('click', () => {
   const boxAll = document.querySelectorAll('.box-inner');
   // console.log(boxAll);
-  cubBlue = randomInteger(0, boxAll.length);
-  console.log(cubBlue);
-  console.log(boxAll.length);
-  // boxAll.classList.add('cub-blue');
-  console.log(boxAll);
+  randomNumber = randomInteger(0, boxAll.length);
+  // console.log(randomNumber);
+  boxAll[randomNumber].classList.add('cub-blue');
 
-};
-btn.addEventListener('click', startGame);
+  // Счетчик кливов на мяч + изменение цвета
+  let count = 0;
+  boxAll[randomNumber].addEventListener('click', () => {
+    count++;
+    inp.innerHTML = count;
+    boxAll[randomNumber].addEventListener('mousedown', () => {
+      boxAll[randomNumber].classList.add('cub-red');
+    });
+    boxAll[randomNumber].addEventListener('mouseup', () => {
+      boxAll[randomNumber].classList.remove('cub-red');
+    });
+  });
+});
+
+
+
+
+
+
+
+
+  
