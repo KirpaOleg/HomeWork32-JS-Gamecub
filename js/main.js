@@ -13,47 +13,70 @@ const inp = document.querySelector('.inp');
 const btn = document.querySelector('.button');
 const timer = document.querySelector('.timer');
 const box = document.querySelector('.box');
-
+let count = 0;
+let countTimer = 5;
 
 // Генерируем поле из 100 квадратов
 for (let i = 0; i < 99; i++) {
-  let netBox = document.createElement('box-inner');
+  let netBox = document.createElement('div');
   netBox.className ='box-inner';
   box.appendChild(netBox);
 };
+
+// Массив квадратов
+const boxAll = document.querySelectorAll('.box-inner');
 
 // Рандомайзер
 const randomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+
 // Функция появления синего квадрата 
-btn.addEventListener('click', () => {
-  const boxAll = document.querySelectorAll('.box-inner');
-  // console.log(boxAll);
-  randomNumber = randomInteger(0, boxAll.length);
-  // console.log(randomNumber);
-  boxAll[randomNumber].classList.add('cub-blue');
+const startGame = () => {
+
+ // Таймер обратного отсчета
+    const timerMin = setInterval(() => {
+      let sec = Math.floor(countTimer % 60);
+      let min = Math.floor(countTimer / 60 % 60);
+      let timerShow = `${('0' + min).slice(-2)}:${('0' + sec).slice(-2)}`;
+      timer.innerText = timerShow;
+      countTimer--;
+      if (countTimer < 0) {
+        console.log(`Останавливаем таймер`)
+        clearInterval(timerMin);
+      }
+    }, 1000);
+    
+     // Конец 
+    const gameOver = () => {
+      box.innerHTML = `SCORE`;
+      console.log(`Останавливаем таймер2`)
+      setTimeout(timerGameOver);
+    }
+    let timerGameOver = setTimeout(gameOver, 1000);
+  
+
+
+    let randomNumber = randomInteger(0, (boxAll.length - 1));
+    boxAll[randomNumber].classList.add('cub-blue');
 
   // Счетчик кливов на мяч + изменение цвета
-  let count = 0;
-  boxAll[randomNumber].addEventListener('click', () => {
-    count++;
-    inp.innerHTML = count;
-    boxAll[randomNumber].addEventListener('mousedown', () => {
-      boxAll[randomNumber].classList.add('cub-red');
-    });
-    boxAll[randomNumber].addEventListener('mouseup', () => {
-      boxAll[randomNumber].classList.remove('cub-red');
-    });
-  });
-});
+  const boxIvent = () => {
+    boxAll[randomNumber].removeEventListener('click', startGame);
+      count++;
+      inp.innerHTML = count;
+      // Удаление квадрата при клике мышки
+      boxAll[randomNumber].classList.remove('cub-blue');
+      boxAll[randomNumber].removeEventListener('click', boxIvent);
+    };
+    boxAll[randomNumber].addEventListener('click', startGame);
+    boxAll[randomNumber].addEventListener('click', boxIvent);
+  };
+
+btn.addEventListener('click', startGame);
 
 
 
 
 
-
-
-
-  
