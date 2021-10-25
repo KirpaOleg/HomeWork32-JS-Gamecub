@@ -31,7 +31,6 @@ const randomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-
 // Функция появления синего квадрата 
 const startGame = () => {
 
@@ -47,17 +46,18 @@ const startGame = () => {
         clearInterval(timerMin);
       }
     }, 1000);
-    
+
      // Конец 
     const gameOver = () => {
-      box.innerHTML = `SCORE`;
-      console.log(`Останавливаем таймер2`)
-      setTimeout(timerGameOver);
-    }
-    let timerGameOver = setTimeout(gameOver, 1000);
+      if (count === 0) {
+        box.innerHTML = `SCORE`;
+        console.log(`Останавливаем таймер2`)
+      }
+    };
+   setTimeout(gameOver, 1000);
   
 
-
+    // Рандомный елемент из масива
     let randomNumber = randomInteger(0, (boxAll.length - 1));
     boxAll[randomNumber].classList.add('cub-blue');
 
