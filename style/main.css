@@ -73,4 +73,9 @@ button {
 .cub-blue {
   background-color: blue;
 }
+
+.game-over {
+  padding-top: 120px;
+  font-size: 40px;
+}
 /*# sourceMappingURL=main.css.map */

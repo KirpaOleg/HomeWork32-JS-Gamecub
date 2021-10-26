@@ -15,6 +15,7 @@ const timer = document.querySelector('.timer');
 const box = document.querySelector('.box');
 let count = 0;
 let countTimer = 5;
+let startInterval = 0;
 
 // Генерируем поле из 100 квадратов
 for (let i = 0; i < 99; i++) {
@@ -34,34 +35,35 @@ const randomInteger = (min, max) => {
 // Функция появления синего квадрата 
 const startGame = () => {
 
- // Таймер обратного отсчета
-    const timerMin = setInterval(() => {
-      let sec = Math.floor(countTimer % 60);
-      let min = Math.floor(countTimer / 60 % 60);
-      let timerShow = `${('0' + min).slice(-2)}:${('0' + sec).slice(-2)}`;
-      timer.innerText = timerShow;
-      countTimer--;
+  // Таймер обратного отсчета + конец игры
+  if (startInterval === 0) {
+    // console.log(`interval`);
+    let timerMin = setInterval(() => {
       if (countTimer < 0) {
-        console.log(`Останавливаем таймер`)
         clearInterval(timerMin);
+        setTimeout(() => {
+          box.style.display = 'block';
+          box.classList.add('game-over');
+          box.innerHTML = `<img src="image/over.png"><br><br>YOUR SCORE = ${count}`;
+          // console.log(`game over`);
+        }, 0);
+      } else {
+        let sec = Math.floor(countTimer % 60);
+        let min = Math.floor(countTimer / 60 % 60);
+        let timerShow = `${('0' + min).slice(-2)}:${('0' + sec).slice(-2)}`;
+        console.log(timerShow);
+        timer.innerText = timerShow;
+        countTimer--;
       }
     }, 1000);
-
-     // Конец 
-    const gameOver = () => {
-      if (count === 0) {
-        box.innerHTML = `SCORE`;
-        console.log(`Останавливаем таймер2`)
-      }
-    };
-   setTimeout(gameOver, 1000);
+    startInterval = 1;
+  };
   
+  // Рандомный елемент из масива
+  let randomNumber = randomInteger(0, (boxAll.length - 1));
+  boxAll[randomNumber].classList.add('cub-blue');
 
-    // Рандомный елемент из масива
-    let randomNumber = randomInteger(0, (boxAll.length - 1));
-    boxAll[randomNumber].classList.add('cub-blue');
-
-  // Счетчик кливов на мяч + изменение цвета
+  // Счетчик кливов на квадрат + изменение цвета
   const boxIvent = () => {
     boxAll[randomNumber].removeEventListener('click', startGame);
       count++;
