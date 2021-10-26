@@ -32,7 +32,7 @@ const randomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-// Функция появления синего квадрата 
+// Старт игры 
 const startGame = () => {
 
   // Таймер обратного отсчета + конец игры
@@ -61,19 +61,21 @@ const startGame = () => {
   
   // Рандомный елемент из масива
   let randomNumber = randomInteger(0, (boxAll.length - 1));
-  boxAll[randomNumber].classList.add('cub-blue');
+  let randomElement = boxAll[randomNumber];
+  randomElement.classList.add('cub-blue');
 
   // Счетчик кливов на квадрат + изменение цвета
   const boxIvent = () => {
-    boxAll[randomNumber].removeEventListener('click', startGame);
+    randomElement.removeEventListener('click', startGame);
       count++;
       inp.innerHTML = count;
       // Удаление квадрата при клике мышки
-      boxAll[randomNumber].classList.remove('cub-blue');
-      boxAll[randomNumber].removeEventListener('click', boxIvent);
+      randomElement.classList.remove('cub-blue');
+      randomElement.removeEventListener('click', boxIvent);
     };
-    boxAll[randomNumber].addEventListener('click', startGame);
-    boxAll[randomNumber].addEventListener('click', boxIvent);
+    
+    randomElement.addEventListener('click', startGame);
+    randomElement.addEventListener('click', boxIvent);
   };
 
 btn.addEventListener('click', startGame);
